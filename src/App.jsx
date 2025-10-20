@@ -1,13 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useEffect } from 'react'
-import Header from './components/Header'
-import { Homepage } from './pages/Homepage'
-import Footer from './components/Footer'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import ServicesPages from './pages/Services'
-import AboutPages from './pages/About'
-import ContactPages from './pages/Contact'
+import Footer from './components/Footer';
+import Homepage from './pages/Homepages';
+import Header from './components/Header';
+import ServicesPages from './pages/ServicesPage';
+import Aboutpages from './pages/Aboutpages';
+import Contactpages from './pages/Contactpages';
+import ScrollToTop from './components/Scroll';
 
 function App() {
   useEffect(() => {
@@ -18,21 +19,23 @@ function App() {
       mirror: false,
       offset: 50,
     });
-  })
+  }, [])
 
   return (
     <Router>
-      <div className="font-sans">
+      <div className="font-sans overflow-x-hidden">
+        <ScrollToTop />
         <Header />
-        <Routes>
-          <Route path='/' element={<Homepage />} />
-          <Route path='/layanan' element={<ServicesPages />} />
-          <Route path='/tentang-kami' element={<AboutPages />} />
-          <Route path='/kontak' element={<ContactPages />} />
-        </Routes>
+        <main role="main">
+          <Routes>
+            <Route path='/' element={<Homepage />} />
+            <Route path='/layanan' element={<ServicesPages />} />
+            <Route path='/tentang-kami' element={<Aboutpages />} />
+            <Route path='/kontak' element={<Contactpages />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
-
     </Router>
   )
 }
